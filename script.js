@@ -10,7 +10,7 @@ const modeIcon = get("mode-icon");
 const input= get("input");
 const btnsubmit = get("submit");
 const avatar= get("avatar");
-const UserName = get("name");
+const userName = get("name");
 const user= get("user");
 const date = get("date");
 const months = ["Jan","Feb","Mar", "Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov", "Dec"];
@@ -85,7 +85,7 @@ function updateProfile(data){
             }
         }
         avatar.src= `${data.avatar_url}`;
-        UserName.innerText = data.name === null ? data.login : data.name;
+        userName.innerText = data.name === null ? data.login : data.name;
         user.innerText = `@${data.login}`;
         user.href = `${data.html_url}`;
         datesegments = data.created_at.split("T").shift().split("-");        
