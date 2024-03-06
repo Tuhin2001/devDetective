@@ -10,7 +10,7 @@ const modeIcon = get("mode-icon");
 const input= get("input");
 const btnsubmit = get("submit");
 const avatar= get("avatar");
-const userName = get("name");
+const UserName = get("name");
 const user= get("user");
 const date = get("date");
 const months = ["Jan","Feb","Mar", "Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov", "Dec"];
@@ -53,6 +53,17 @@ btnMode.addEventListener("click",function(){
     }
 })
 
+// function getUserData(gitUrl){
+//     fetch(gitUrl)
+//     .then((response)=> response.json())
+//     .then((data) =>{
+//         console.log(data);
+//         updateProfile(data);
+//     })
+//     .catch((e)=>{
+//         throw(e);
+//     })
+// }
 function getUserData(gitUrl) {
     fetch(gitUrl)
         .then((response) => {
@@ -72,6 +83,10 @@ function getUserData(gitUrl) {
         });
 }
 function updateProfile(data){
+    // if(datadata.message === "Not found"){
+    //     noresults.style.display = "block";
+    //     return;
+    // }
     if(data.message !== "Not found"){
         noresults.style.display="none";
         function checkNull(para1,para2){
@@ -85,7 +100,7 @@ function updateProfile(data){
             }
         }
         avatar.src= `${data.avatar_url}`;
-        userName.innerText = data.name === null ? data.login : data.name;
+        UserName.innerText = data.name === null ? data.login : data.name;
         user.innerText = `@${data.login}`;
         user.href = `${data.html_url}`;
         datesegments = data.created_at.split("T").shift().split("-");        
@@ -103,7 +118,7 @@ function updateProfile(data){
         searchbar.classList.toggle("active");
         profilecontainer.classList.toggle("active");
     }
-    else{
+    else {
         noresults.style.display = "block";
     }
 }
@@ -141,16 +156,13 @@ function init(){
     const value = localStorage.getItem("dark-mode");
   
     if(value === null) {
-      console.log("null k andar");
       localStorage.setItem("dark-mode", darkMode);
       lightModeProperties();
     }
     else if(value == "true") {
-      console.log("truer k andar");
       darkModeProperties();
     }
     else if(value == "false") {
-      console.log("false k andar");
       lightModeProperties();
     }
   
