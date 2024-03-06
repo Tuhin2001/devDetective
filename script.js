@@ -53,16 +53,23 @@ btnMode.addEventListener("click",function(){
     }
 })
 
-function getUserData(gitUrl){
+function getUserData(gitUrl) {
     fetch(gitUrl)
-    .then((response)=> response.json())
-    .then((data) =>{
-        console.log(data);
-        updateProfile(data);
-    })
-    .catch((e)=>{
-        throw(e);
-    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+            updateProfile(data);
+        })
+        .catch((error) => {
+            console.error('Error fetching user data:', error);
+            // Handle the error here, for example:
+            noresults.style.display = 'block';
+        });
 }
 function updateProfile(data){
     if(data.message !== "Not found"){
